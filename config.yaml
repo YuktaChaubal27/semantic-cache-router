@@ -1,14 +1,13 @@
 # All model calls go through LiteLLM, so any provider/model string LiteLLM
-# understands works here (e.g. "openai/gpt-4o-mini", "anthropic/<model-id>").
+# understands works here.
 models:
-  small: "openai/gpt-4o-mini"
-  large: "openai/gpt-4o"
+  small: "anthropic/claude-haiku-4-5-20251001"
+  large: "anthropic/claude-sonnet-4-6"
 
-# USD per 1M tokens. Fill these in from your provider's current pricing page.
-# Costs are computed as tokens x price so the numbers are reproducible.
+# USD per 1M tokens. Keys must match the model strings above exactly.
 prices:
-  "openai/gpt-4o-mini": {input: 0.0, output: 0.0}
-  "openai/gpt-4o":      {input: 0.0, output: 0.0}
+  "anthropic/claude-haiku-4-5-20251001": {input: 1.0, output: 5.0}
+  "anthropic/claude-sonnet-4-6":         {input: 3.0, output: 15.0}
 
 embedding_model: "sentence-transformers/all-mpnet-base-v2"
 
@@ -17,6 +16,8 @@ cache:
   threshold: 0.86
   verifier: null
   verify_threshold: 0.50
+  ttl_seconds: 604800
+  collection: "semantic_cache"
 
 retrieval:
   collection: "documents"
