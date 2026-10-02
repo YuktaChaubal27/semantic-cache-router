@@ -2,11 +2,10 @@
 
 Part A: embedding similarity + guard only (one threshold).
 Part B: two-stage. The embedding threshold becomes a loose floor that finds
-        candidates, and a cross-encoder verifier makes the final call.
+        candidates, and a verifier (small LLM or cross-encoder) makes the final call.
 Each part picks the lowest setting with zero false hits on near-miss pairs.
 
     python scripts/tune_threshold.py data/threshold_pairs.jsonl
-    python scripts/tune_threshold.py data/threshold_pairs.jsonl --floor 0.55
 """
 import argparse
 import json
@@ -45,7 +44,6 @@ def show(rows, chosen, label, every=5):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("pairs")
-    ap.add_argument("--floor", type=float, default=0.50, help="embedding floor for the two-stage check")
     args = ap.parse_args()
 
     pairs = [json.loads(l) for l in open(args.pairs) if l.strip()]
@@ -68,30 +66,37 @@ def main():
     for p in sorted([p for p in neg if p["guard_ok"]], key=lambda p: -p["sim"])[:5]:
         print(f"  {p['sim']:.3f}  {p['a']!r} vs {p['b']!r}")
 
-    # ---- Part B: two-stage with cross-encoder verifier ----
+    # ---- Part B: two-stage with verifier ----
     if not settings()["cache"].get("verifier"):
         print("\nNo verifier set in config.yaml; skipping part B.")
     else:
-        from app.verify import duplicate_probs
-        probs = duplicate_probs([(p["a"], p["b"]) for p in pairs])
-        for p, pr in zip(pairs, probs):
-            p["prob"] = pr
+        from app import verify
+        vt = settings()["cache"]["verify_threshold"]
+        print(f"\nRunning the verifier on all {len(pairs)} pairs...")
+        total_cost = 0.0
+        for p in pairs:
+            p["vscore"], c = verify.check(p["a"], p["b"])
+            total_cost += c
+            p["verified"] = p["vscore"] >= vt
 
-        below = [p for p in pos if p["sim"] < args.floor]
-        print(f"\n=== B. Two-stage: embedding floor {args.floor:.2f} + guard + verifier ===")
-        print(f"({len(below)} of {len(pos)} paraphrases fall below the floor and can never hit)")
-        values = [round(0.05 + i * 0.05, 2) for i in range(19)]  # 0.05 .. 0.95
-        rows, chosen_b = sweep(pos, neg, values,
-                               lambda p, v: p["sim"] >= args.floor and p["guard_ok"] and p["prob"] >= v)
-        show(rows, chosen_b, "verifier", every=5)
-        result["two_stage"] = {"floor": args.floor, "sweep": rows, "chosen": chosen_b}
+        print(f"\n=== B. Two-stage: embedding floor + guard + verifier ({settings()['cache']['verifier']}) ===")
+        floors = [round(0.30 + i * 0.05, 2) for i in range(12)]  # 0.30 .. 0.85
+        rows, chosen_b = sweep(pos, neg, floors,
+                               lambda p, f: p["sim"] >= f and p["guard_ok"] and p["verified"])
+        # Share of paraphrase checks the verifier would be asked to make at each floor
+        show(rows, chosen_b, "floor")
+        result["two_stage"] = {"verifier": settings()["cache"]["verifier"], "sweep": rows, "chosen": chosen_b,
+                               "verifier_cost_per_check": total_cost / max(len(pairs), 1)}
 
-        print("\nNear-misses the verifier rates most duplicate-like (must stay low):")
-        for p in sorted([p for p in neg if p["guard_ok"] and p["sim"] >= args.floor], key=lambda p: -p["prob"])[:5]:
-            print(f"  verifier {p['prob']:.3f}  sim {p['sim']:.3f}  {p['a']!r} vs {p['b']!r}")
-        print("\nParaphrases the verifier rates least duplicate-like (should stay high):")
-        for p in sorted(pos, key=lambda p: p["prob"])[:5]:
-            print(f"  verifier {p['prob']:.3f}  sim {p['sim']:.3f}  {p['a']!r} vs {p['b']!r}")
+        wrong_yes = [p for p in neg if p["guard_ok"] and p["verified"]]
+        wrong_no = [p for p in pos if not p["verified"]]
+        print(f"\nVerifier mistakes: {len(wrong_yes)} near-misses accepted, {len(wrong_no)} paraphrases rejected")
+        for p in sorted(wrong_yes, key=lambda p: -p["sim"]):
+            print(f"  accepted (wrong)  sim {p['sim']:.3f}  {p['a']!r} vs {p['b']!r}")
+        for p in sorted(wrong_no, key=lambda p: -p["sim"]):
+            print(f"  rejected (wrong)  sim {p['sim']:.3f}  {p['a']!r} vs {p['b']!r}")
+        print(f"\nVerifier cost: ${total_cost:.4f} for {len(pairs)} checks "
+              f"(${total_cost / max(len(pairs), 1):.6f} per check)")
 
     # ---- Summary ----
     print("\n=== Summary (zero false hits) ===")
@@ -99,10 +104,10 @@ def main():
         print(f"  Embedding only: threshold {chosen_a['value']:.2f} -> hit rate {chosen_a['hit_rate']:.0%}")
     if result.get("two_stage", {}).get("chosen"):
         c = result["two_stage"]["chosen"]
-        print(f"  Two-stage:      floor {args.floor:.2f}, verifier {c['value']:.2f} -> hit rate {c['hit_rate']:.0%}")
-        print(f"\n  Put in config.yaml:  threshold: {args.floor:.2f}   verify_threshold: {c['value']:.2f}")
+        print(f"  Two-stage:      floor {c['value']:.2f} + verifier -> hit rate {c['hit_rate']:.0%}")
+        print(f"\n  Put in config.yaml:  threshold: {c['value']:.2f}   (keep the verifier line)")
     elif "two_stage" in result:
-        print("  Two-stage: no verifier setting had zero false hits. Try a higher --floor.")
+        print("  Two-stage: the verifier accepted a near-miss at every floor (see mistakes above).")
 
     Path("results").mkdir(exist_ok=True)
     json.dump(result, open("results/threshold.json", "w"), indent=2)

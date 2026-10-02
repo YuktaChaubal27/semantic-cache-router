@@ -41,27 +41,34 @@ def _filter(version: int, tenant: str | None) -> Filter:
     ])
 
 
-def nearest(vec: list[float], query: str, version: int, tenant: str | None = None) -> CacheHit | None:
+def nearest(vec: list[float], query: str, version: int,
+            tenant: str | None = None) -> tuple[CacheHit | None, float]:
     """Three checks, cheapest first:
     1. embedding similarity >= threshold (inside the vector search)
     2. guard: numbers and acronyms must not conflict
-    3. verifier: a cross-encoder must agree the questions are duplicates
+    3. verifier (optional): reads both questions and confirms they match
+    Returns (hit or None, verification cost in USD).
     """
     cfg = settings()["cache"]
     res = client().query_points(
         _collection(), query=vec, query_filter=_filter(version, tenant), limit=5,
         score_threshold=cfg["threshold"], with_payload=True,
     ).points
+    cost, checks = 0.0, 0
     for p in res:  # already sorted by similarity
         cached_q = p.payload["query"]
         if not compatible(query, cached_q):
             continue
         if not verify.enabled():
-            return CacheHit(score=p.score, payload=json.loads(p.payload["result"]))
-        prob = verify.duplicate_prob(query, cached_q)
-        if prob >= cfg["verify_threshold"]:
-            return CacheHit(score=p.score, payload=json.loads(p.payload["result"]), verify_score=prob)
-    return None
+            return CacheHit(score=p.score, payload=json.loads(p.payload["result"])), cost
+        if checks >= cfg.get("max_verify_checks", 2):
+            break  # cap verification spend per request
+        score, c = verify.check(query, cached_q)
+        cost += c
+        checks += 1
+        if score >= cfg["verify_threshold"]:
+            return CacheHit(score=p.score, payload=json.loads(p.payload["result"]), verify_score=score), cost
+    return None, cost
 
 
 def store(vec: list[float], query: str, result: dict, version: int, tenant: str | None = None) -> None:

@@ -24,19 +24,21 @@ def answer(query: str, tenant: str | None = None, mode: str = "full", run_id: st
     try:
         version = db.get_corpus_version()
         q_vec = None
+        verify_cost = 0.0  # spent on cache verification, even when it misses
 
         if mode == "full":
             q_vec = embed(normalize(query))
-            hit = cache.nearest(q_vec, query, version=version, tenant=tenant)
+            hit, verify_cost = cache.nearest(q_vec, query, version=version, tenant=tenant)
             if hit:  # threshold, guard and verifier are all applied inside cache.nearest
-                rid = db.log_request(**base, cache_hit=1, latency_ms=ms())
+                rid = db.log_request(**base, cache_hit=1, cost_usd=verify_cost, latency_ms=ms())
                 return {**hit.payload, "cache_hit": True, "cache_score": hit.score,
-                        "verify_score": hit.verify_score, "request_id": rid}
+                        "verify_score": hit.verify_score, "cost_usd": verify_cost, "request_id": rid}
 
         hits = retrieve(query)
         route = "complex" if mode == "baseline" else classify(query, [h["score"] for h in hits])
         result = generate(query, hits, model=large if route == "complex" else small)
-        total_cost, in_tok, out_tok = result["cost_usd"], result["input_tokens"], result["output_tokens"]
+        total_cost = result["cost_usd"] + verify_cost
+        in_tok, out_tok = result["input_tokens"], result["output_tokens"]
 
         escalated = False
         if route == "simple" and needs_escalation(result, esc["min_top_score"], esc["require_citation"]):

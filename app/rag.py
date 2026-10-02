@@ -37,7 +37,7 @@ def generate(query: str, hits: list[dict], model: str) -> dict:
         {"role": "user", "content": f"Sources:\n{context}\n\nQuestion: {query}"},
     ])
     out["answer"] = out.pop("text").strip()
-    out["sources"] = [h["source"] for h in hits]
+    out["sources"] = list(dict.fromkeys(h["source"] for h in hits))  # unique, in rank order
     out["retrieval_scores"] = [h["score"] for h in hits]
     return out
 

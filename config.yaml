@@ -13,8 +13,8 @@ embedding_model: "sentence-transformers/all-mpnet-base-v2"
 
 cache:
   # Set this with scripts/tune_threshold.py, not by hand.
-  threshold: 0.86
-  verifier: null
+  threshold: 0.50
+  verifier: "llm:anthropic/claude-haiku-4-5-20251001"
   verify_threshold: 0.50
   ttl_seconds: 604800
   collection: "semantic_cache"
