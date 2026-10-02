@@ -1,0 +1,12 @@
+{"query": "How do I reset my password?", "label": "simple"}
+{"query": "Does two-factor support SMS?", "label": "simple"}
+{"query": "How long does a refund take?", "label": "simple"}
+{"query": "What is the deletion grace period?", "label": "simple"}
+{"query": "Where do I turn on two-factor authentication?", "label": "simple"}
+{"query": "When does the reset link expire?", "label": "simple"}
+{"query": "Compare the refund policy for EU and US customers.", "label": "complex"}
+{"query": "Why is SMS not supported for two-factor authentication?", "label": "complex"}
+{"query": "Explain the difference between deleting my account and cancelling deletion.", "label": "complex"}
+{"query": "I bought in the US 20 days ago but moved to Germany; which refund rules apply and how long will it take?", "label": "complex"}
+{"query": "Should I use an authenticator app or a security key?", "label": "complex"}
+{"query": "What happens to my refunds and data if I delete my account during a pending refund?", "label": "complex"}

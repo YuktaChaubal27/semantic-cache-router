@@ -1,0 +1,31 @@
+# All model calls go through LiteLLM, so any provider/model string LiteLLM
+# understands works here (e.g. "openai/gpt-4o-mini", "anthropic/<model-id>").
+models:
+  small: "openai/gpt-4o-mini"
+  large: "openai/gpt-4o"
+
+# USD per 1M tokens. Fill these in from your provider's current pricing page.
+# Costs are computed as tokens x price so the numbers are reproducible.
+prices:
+  "openai/gpt-4o-mini": {input: 0.0, output: 0.0}
+  "openai/gpt-4o":      {input: 0.0, output: 0.0}
+
+embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
+
+cache:
+  # Set this with scripts/tune_threshold.py, not by hand.
+  threshold: 0.92
+  ttl_seconds: 604800        # 7 days, a safety net on top of corpus_version
+  collection: "semantic_cache"
+
+retrieval:
+  collection: "documents"
+  top_k: 4
+
+escalation:
+  min_top_score: 0.35        # escalate if best retrieval score is below this
+  require_citation: true
+
+paths:
+  qdrant: "./.qdrant"        # local on-disk Qdrant, no server needed
+  db: "./requests.db"

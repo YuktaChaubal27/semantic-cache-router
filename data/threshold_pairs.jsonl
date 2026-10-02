@@ -1,0 +1,10 @@
+{"a": "how do I reset my password", "b": "password reset steps", "should_hit": true}
+{"a": "how do I reset my password", "b": "I forgot my password, how do I change it?", "should_hit": true}
+{"a": "how long do refunds take", "b": "refund processing time", "should_hit": true}
+{"a": "can I turn on 2FA", "b": "how to enable two-factor authentication", "should_hit": true}
+{"a": "how do I delete my account", "b": "steps to remove my account", "should_hit": true}
+{"a": "refund policy in the EU", "b": "refund policy in the US", "should_hit": false}
+{"a": "how do I reset my password", "b": "how do I reset my username", "should_hit": false}
+{"a": "can I get a refund after 30 days", "b": "can I get a refund after 14 days", "should_hit": false}
+{"a": "how do I delete my account", "b": "how do I cancel account deletion", "should_hit": false}
+{"a": "does 2FA support SMS", "b": "does 2FA support security keys", "should_hit": false}
