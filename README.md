@@ -20,7 +20,7 @@ Cache answers by query similarity, send easy questions to a small model and hard
 ```mermaid
 flowchart LR
     Q[Query] --> N[Normalize + embed]
-    N --> C{Cache hit?<br/>score ≥ threshold<br/>specifics match<br/>same corpus version<br/>same tenant, within TTL}
+    N --> C{Cache hit?<br/>similarity ≥ floor<br/>specifics match<br/>verifier agrees<br/>same corpus version<br/>same tenant, within TTL}
     C -- yes --> A[Return cached answer]
     C -- no --> R[Retrieve chunks]
     R --> RT{Router}
@@ -42,6 +42,8 @@ Every request, hit or miss, is logged to SQLite with model, tokens, cost, latenc
 
 **A guard catches what embeddings miss.** Embedding models score "refund after 30 days" and "refund after 14 days" as near-identical. Before serving a cached answer, the cache checks that numbers and acronyms (EU, US) don't conflict between the new query and the cached one, and falls through to the next candidate if they do.
 
+**A cross-encoder verifies every cache hit.** Embedding models capture topic but not direction, so "cancel my subscription" and "restart my subscription" score as near-duplicates. With embeddings alone, a cache with zero false hits only reused about 10% of true paraphrases on the test set. The cache now works in two stages: embedding search finds candidates above a loose floor, then a cross-encoder trained on duplicate-question detection reads both questions together and makes the final call. It only runs when there is a candidate, so it adds milliseconds, not an LLM call.
+
 **Re-ingesting invalidates the cache instantly.** `scripts/ingest.py` bumps `corpus_version`, and lookups only match the current version. The TTL is a second safety net.
 
 **Personalized answers are tenant-scoped.** Pass `tenant_id` and entries are only visible to that tenant; shared answers use a shared namespace. This prevents one user's answer from being served to another.
@@ -52,7 +54,7 @@ Every request, hit or miss, is logged to SQLite with model, tokens, cost, latenc
 
 **Escalation cost is counted honestly.** When a simple-routed query escalates, the logged cost includes both the wasted small-model call and the large-model call, and the escalation rate is tracked separately.
 
-**The threshold is chosen from data.** `tune_threshold.py` sweeps 0.85 to 0.97 and picks the lowest value with zero false hits on near-miss pairs like "refund policy in the EU" vs "refund policy in the US".
+**Thresholds are chosen from data.** `tune_threshold.py` runs 50 paraphrase pairs and 50 near-miss pairs through both the embedding-only cache and the two-stage cache, and picks the most permissive settings with zero false hits.
 
 ## Quickstart
 

@@ -1,5 +1,20 @@
-{"question": "How do I reset my password?", "keywords": ["Settings", "Security", "30 minutes"], "paraphrases": ["password reset steps", "I forgot my password, how do I change it?"]}
-{"question": "What is the refund window for EU customers?", "keywords": ["14 days"], "paraphrases": ["EU refund deadline", "how many days do Europeans have to get a refund"]}
-{"question": "What is the refund window for US customers?", "keywords": ["30 days", "credit"], "paraphrases": ["US refund deadline"]}
-{"question": "Is SMS supported for two-factor authentication?", "keywords": ["not supported"], "paraphrases": ["can I get 2FA codes by text message"]}
-{"question": "Compare refund rules for EU and US customers.", "keywords": ["14 days", "30 days"], "paraphrases": ["how do EU and US refund policies differ"]}
+{"question": "How do I reset my password?", "keywords": ["settings", "security"], "paraphrases": ["password reset steps", "I forgot my password, how do I change it?"]}
+{"question": "How long is the password reset link valid?", "keywords": ["30"], "paraphrases": ["when does the reset link expire"]}
+{"question": "Is SMS supported for two-factor authentication?", "keywords": ["authenticator"], "paraphrases": ["can I get two-factor codes by text message"]}
+{"question": "What is the grace period for deleting an account?", "keywords": ["14"], "paraphrases": ["how long before my account is permanently deleted"]}
+{"question": "What is the refund window for EU customers?", "keywords": ["14"], "paraphrases": ["EU refund deadline", "how many days do EU customers have to get a refund"]}
+{"question": "What is the refund window for US customers?", "keywords": ["30", "credit"], "paraphrases": ["US refund deadline"]}
+{"question": "How long do approved refunds take to arrive?", "keywords": ["5", "10"], "paraphrases": ["refund processing time"]}
+{"question": "What payment methods do you accept?", "keywords": ["visa", "paypal"], "paraphrases": ["which ways can I pay"]}
+{"question": "Where can I download my invoices?", "keywords": ["billing", "pdf"], "paraphrases": ["how do I get a copy of my invoice"]}
+{"question": "Why do I see a duplicate charge on my card?", "keywords": ["hold", "3"], "paraphrases": ["why was I charged twice"]}
+{"question": "What happens if my payment fails?", "keywords": ["retry", "paused"], "paraphrases": ["what to do when a payment is declined"]}
+{"question": "How do I cancel my subscription?", "keywords": ["billing", "end"], "paraphrases": ["stop my subscription"]}
+{"question": "Can I pause my subscription?", "keywords": ["3", "month"], "paraphrases": ["is it possible to put my plan on hold"]}
+{"question": "What happens when I upgrade my plan?", "keywords": ["immediately", "prorated"], "paraphrases": ["move to a higher plan"]}
+{"question": "How do I export my data?", "keywords": ["privacy", "24"], "paraphrases": ["download a copy of all my data"]}
+{"question": "Do you sell my personal data?", "keywords": ["never"], "paraphrases": ["is my data sold to third parties"]}
+{"question": "Why is my account locked?", "keywords": ["5", "15"], "paraphrases": ["my account got locked, why"]}
+{"question": "Compare the refund policy for EU and US customers.", "keywords": ["14", "30"], "paraphrases": ["how do EU and US refund policies differ"]}
+{"question": "Should I use an authenticator app or a security key for two-factor?", "keywords": ["authenticator", "phishing"], "paraphrases": ["authenticator app vs hardware key for two-factor"]}
+{"question": "What is the difference between downgrading and cancelling my subscription?", "keywords": ["end", "cycle"], "paraphrases": ["downgrade vs cancel subscription"]}

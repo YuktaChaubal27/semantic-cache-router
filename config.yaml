@@ -14,9 +14,9 @@ embedding_model: "sentence-transformers/all-mpnet-base-v2"
 
 cache:
   # Set this with scripts/tune_threshold.py, not by hand.
-  threshold: 0.92
-  ttl_seconds: 604800        # 7 days, a safety net on top of corpus_version
-  collection: "semantic_cache"
+  threshold: 0.86
+  verifier: null
+  verify_threshold: 0.50
 
 retrieval:
   collection: "documents"

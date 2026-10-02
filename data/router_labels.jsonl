@@ -1,12 +1,100 @@
 {"query": "How do I reset my password?", "label": "simple"}
-{"query": "Does two-factor support SMS?", "label": "simple"}
-{"query": "How long does a refund take?", "label": "simple"}
-{"query": "What is the deletion grace period?", "label": "simple"}
-{"query": "Where do I turn on two-factor authentication?", "label": "simple"}
 {"query": "When does the reset link expire?", "label": "simple"}
+{"query": "Does two-factor support SMS?", "label": "simple"}
+{"query": "Where are the security settings?", "label": "simple"}
+{"query": "How long is the account deletion grace period?", "label": "simple"}
+{"query": "Can I cancel my account deletion?", "label": "simple"}
+{"query": "How do I change my email address?", "label": "simple"}
+{"query": "I tried to sign in a bunch of times with the wrong password this morning and now it says locked, how long do I have to wait?", "label": "simple"}
+{"query": "Where can I see my active sessions?", "label": "simple"}
+{"query": "How do I sign out of all devices?", "label": "simple"}
+{"query": "What is the refund window in the EU?", "label": "simple"}
+{"query": "What is the refund window in the US?", "label": "simple"}
+{"query": "How long do refunds take to arrive?", "label": "simple"}
+{"query": "Where do refunds go?", "label": "simple"}
+{"query": "What payment methods do you accept?", "label": "simple"}
+{"query": "Do you accept PayPal?", "label": "simple"}
+{"query": "Where can I download invoices?", "label": "simple"}
+{"query": "What format are invoices in?", "label": "simple"}
+{"query": "Which currencies do you support?", "label": "simple"}
+{"query": "How many times do you retry a failed payment?", "label": "simple"}
+{"query": "What happens after a failed payment?", "label": "simple"}
+{"query": "How do I cancel my subscription?", "label": "simple"}
+{"query": "Can I pause my subscription?", "label": "simple"}
+{"query": "How long can I pause my subscription for?", "label": "simple"}
+{"query": "How do I turn off auto-renewal?", "label": "simple"}
+{"query": "What plans do you offer?", "label": "simple"}
+{"query": "When does a downgrade take effect?", "label": "simple"}
+{"query": "When does an upgrade take effect?", "label": "simple"}
+{"query": "Do I keep access after cancelling?", "label": "simple"}
+{"query": "How do I export my data?", "label": "simple"}
+{"query": "I asked for a copy of all of my account data from the privacy page yesterday afternoon, how long does that usually take to arrive?", "label": "simple"}
+{"query": "Do you sell my data?", "label": "simple"}
+{"query": "How long do you keep data after deletion?", "label": "simple"}
+{"query": "Who can see my workspace data?", "label": "simple"}
+{"query": "Is there a free plan?", "label": "simple"}
+{"query": "Where do I find the Billing page?", "label": "simple"}
+{"query": "How do I update my credit card?", "label": "simple"}
+{"query": "Can I pay with American Express?", "label": "simple"}
+{"query": "What is the Team plan?", "label": "simple"}
+{"query": "How do I enable two-factor authentication?", "label": "simple"}
+{"query": "Can I use a hardware security key?", "label": "simple"}
+{"query": "What file do I get when I export my data?", "label": "simple"}
+{"query": "My manager asked me to send her a receipt for last month's payment for the expense report, where would I find that?", "label": "simple"}
+{"query": "Can annual plans be billed yearly?", "label": "simple"}
+{"query": "How do I contact support?", "label": "simple"}
+{"query": "Where do I change my username?", "label": "simple"}
+{"query": "Can I get a refund as account credit?", "label": "simple"}
+{"query": "How often can I change my username?", "label": "simple"}
+{"query": "How many failed logins lock my account?", "label": "simple"}
+{"query": "Where is the Privacy settings page?", "label": "simple"}
 {"query": "Compare the refund policy for EU and US customers.", "label": "complex"}
 {"query": "Why is SMS not supported for two-factor authentication?", "label": "complex"}
-{"query": "Explain the difference between deleting my account and cancelling deletion.", "label": "complex"}
-{"query": "I bought in the US 20 days ago but moved to Germany; which refund rules apply and how long will it take?", "label": "complex"}
+{"query": "Explain the difference between deleting my account and cancelling the deletion.", "label": "complex"}
 {"query": "Should I use an authenticator app or a security key?", "label": "complex"}
-{"query": "What happens to my refunds and data if I delete my account during a pending refund?", "label": "complex"}
+{"query": "What's the difference between pausing and cancelling my subscription?", "label": "complex"}
+{"query": "Should I upgrade to Team or stay on Pro?", "label": "complex"}
+{"query": "Why was I charged twice and what should I do about it?", "label": "complex"}
+{"query": "I bought in the US 20 days ago but moved to Germany; which refund rules apply?", "label": "complex"}
+{"query": "What happens to my data and invoices if I delete my account?", "label": "complex"}
+{"query": "Compare monthly and annual billing.", "label": "complex"}
+{"query": "Why would my payment fail even though my card works elsewhere?", "label": "complex"}
+{"query": "Explain how proration works when I upgrade mid-cycle.", "label": "complex"}
+{"query": "Which plan is right for me?", "label": "complex"}
+{"query": "What are the pros and cons of pausing versus downgrading?", "label": "complex"}
+{"query": "If I cancel and then reactivate, do I lose my data or my price?", "label": "complex"}
+{"query": "How do refunds work if I upgraded and then cancelled within two weeks?", "label": "complex"}
+{"query": "Why is my account locked and how do I prevent it in future?", "label": "complex"}
+{"query": "Compare data retention for deleted accounts and cancelled subscriptions.", "label": "complex"}
+{"query": "What's the best way to secure my account?", "label": "complex"}
+{"query": "Explain what happens step by step after a failed payment.", "label": "complex"}
+{"query": "Should I export my data before deleting my account?", "label": "complex"}
+{"query": "Why do refunds take 5 to 10 business days?", "label": "complex"}
+{"query": "How do the EU and US refund windows differ and why?", "label": "complex"}
+{"query": "What is the impact of downgrading on my team members?", "label": "complex"}
+{"query": "Can you explain an authorization hold versus a real charge?", "label": "complex"}
+{"query": "Which payment method gets refunds back fastest?", "label": "complex"}
+{"query": "I'm moving from Pro to Free; what features and data will I lose?", "label": "complex"}
+{"query": "Compare security keys and authenticator apps for two-factor.", "label": "complex"}
+{"query": "How should I handle a duplicate charge that my bank disputes?", "label": "complex"}
+{"query": "Why did my refund come back as credit instead of money?", "label": "complex"}
+{"query": "What happens if my payment fails while my subscription is paused?", "label": "complex"}
+{"query": "Explain the tradeoffs between annual and monthly plans.", "label": "complex"}
+{"query": "Who can see my data, and how do I limit it?", "label": "complex"}
+{"query": "Is it better to turn off auto-renewal or cancel outright?", "label": "complex"}
+{"query": "How do I transfer my workspace to a new owner without breaking billing?", "label": "complex"}
+{"query": "Why might my data export take longer than expected?", "label": "complex"}
+{"query": "Compare what admins and members can see.", "label": "complex"}
+{"query": "What should I do if I was charged after cancelling?", "label": "complex"}
+{"query": "How does deleting my account affect my active subscription?", "label": "complex"}
+{"query": "Why does the reset link expire so quickly?", "label": "complex"}
+{"query": "Recommend a plan for a freelancer who works with clients.", "label": "complex"}
+{"query": "Would pausing or downgrading save more money over three months?", "label": "complex"}
+{"query": "What's the difference between deleting my data and exporting it?", "label": "complex"}
+{"query": "How do taxes and currency affect my invoice total?", "label": "complex"}
+{"query": "Why can't I add more team members?", "label": "complex"}
+{"query": "What are the risks of turning off two-factor authentication?", "label": "complex"}
+{"query": "If I'm in the EU on an annual plan, how do refunds work?", "label": "complex"}
+{"query": "Should I contact support or my bank about a missing refund?", "label": "complex"}
+{"query": "Why do you lock accounts after failed logins?", "label": "complex"}
+{"query": "How do refund rules interact with promotional discounts?", "label": "complex"}

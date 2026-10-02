@@ -28,9 +28,10 @@ def answer(query: str, tenant: str | None = None, mode: str = "full", run_id: st
         if mode == "full":
             q_vec = embed(normalize(query))
             hit = cache.nearest(q_vec, query, version=version, tenant=tenant)
-            if hit and hit.score >= cfg["cache"]["threshold"]:
+            if hit:  # threshold, guard and verifier are all applied inside cache.nearest
                 rid = db.log_request(**base, cache_hit=1, latency_ms=ms())
-                return {**hit.payload, "cache_hit": True, "cache_score": hit.score, "request_id": rid}
+                return {**hit.payload, "cache_hit": True, "cache_score": hit.score,
+                        "verify_score": hit.verify_score, "request_id": rid}
 
         hits = retrieve(query)
         route = "complex" if mode == "baseline" else classify(query, [h["score"] for h in hits])

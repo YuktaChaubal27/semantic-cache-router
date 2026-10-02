@@ -3,8 +3,98 @@
 {"a": "how long do refunds take", "b": "refund processing time", "should_hit": true}
 {"a": "can I turn on 2FA", "b": "how to enable two-factor authentication", "should_hit": true}
 {"a": "how do I delete my account", "b": "steps to remove my account", "should_hit": true}
+{"a": "when does the password reset link expire", "b": "how long is the reset link valid", "should_hit": true}
+{"a": "where is the security settings page", "b": "how do I find security settings", "should_hit": true}
+{"a": "what payment methods do you accept", "b": "which ways can I pay", "should_hit": true}
+{"a": "how do I update my credit card", "b": "change the card on file", "should_hit": true}
+{"a": "why was I charged twice", "b": "I see a duplicate charge on my card", "should_hit": true}
+{"a": "where can I download my invoices", "b": "how do I get a copy of my invoice", "should_hit": true}
+{"a": "how do I cancel my subscription", "b": "stop my subscription", "should_hit": true}
+{"a": "how do I upgrade my plan", "b": "move to a higher plan", "should_hit": true}
+{"a": "can I pause my subscription", "b": "is it possible to put my plan on hold", "should_hit": true}
+{"a": "how do I export my data", "b": "download a copy of all my data", "should_hit": true}
+{"a": "how long do you keep my data after deletion", "b": "data retention after account deletion", "should_hit": true}
+{"a": "can I cancel account deletion", "b": "undo my account deletion request", "should_hit": true}
+{"a": "what is the grace period for account deletion", "b": "how long before my account is permanently deleted", "should_hit": true}
+{"a": "does 2FA work with security keys", "b": "can I use a hardware key for two-factor", "should_hit": true}
+{"a": "how do I change my email address", "b": "update the email on my account", "should_hit": true}
+{"a": "how do I change my username", "b": "rename my account username", "should_hit": true}
+{"a": "when will I get my refund", "b": "how soon is my money returned after a refund", "should_hit": true}
+{"a": "can EU customers get a refund without a reason", "b": "do EU buyers need a reason to get a refund", "should_hit": true}
+{"a": "what happens after 30 days in the US", "b": "US refund after 30 days", "should_hit": true}
+{"a": "is SMS supported for 2FA", "b": "can I get two-factor codes by text", "should_hit": true}
+{"a": "how do I contact support", "b": "how can I reach customer service", "should_hit": true}
+{"a": "is my payment information secure", "b": "how do you protect my card details", "should_hit": true}
+{"a": "do you offer annual billing", "b": "can I pay yearly", "should_hit": true}
+{"a": "how do I get a receipt", "b": "where do I find my payment receipt", "should_hit": true}
+{"a": "my payment failed, what do I do", "b": "what to do when a payment is declined", "should_hit": true}
+{"a": "how do I downgrade my plan", "b": "switch to a cheaper plan", "should_hit": true}
+{"a": "will I lose my data if I cancel", "b": "what happens to my data when I cancel my subscription", "should_hit": true}
+{"a": "how do I restart a cancelled subscription", "b": "reactivate my subscription", "should_hit": true}
+{"a": "can I change my billing date", "b": "move my billing cycle date", "should_hit": true}
+{"a": "how do I turn off auto renewal", "b": "disable automatic renewal", "should_hit": true}
+{"a": "how do I log out of all devices", "b": "sign out everywhere", "should_hit": true}
+{"a": "how do I see active sessions", "b": "where can I view devices logged into my account", "should_hit": true}
+{"a": "what happens when my trial ends", "b": "what happens at the end of the free trial", "should_hit": true}
+{"a": "can I get a refund for a partial month", "b": "is there a prorated refund for unused time", "should_hit": true}
+{"a": "how do I request a refund", "b": "where do I ask for my money back", "should_hit": true}
+{"a": "who can see my data", "b": "who has access to my information", "should_hit": true}
+{"a": "do you sell my data", "b": "is my personal data sold to third parties", "should_hit": true}
+{"a": "how do I add a team member", "b": "invite someone to my account", "should_hit": true}
+{"a": "how do I remove a team member", "b": "take a user off my team", "should_hit": true}
+{"a": "what currencies do you support", "b": "which currencies can I pay in", "should_hit": true}
+{"a": "why is my account locked", "b": "my account got locked, why", "should_hit": true}
+{"a": "how do I unlock my account", "b": "regain access to a locked account", "should_hit": true}
+{"a": "is there a student discount", "b": "do students get a discount", "should_hit": true}
+{"a": "how do I change my password", "b": "update my password", "should_hit": true}
+{"a": "how do refunds work for annual plans", "b": "refund rules for yearly subscriptions", "should_hit": true}
 {"a": "refund policy in the EU", "b": "refund policy in the US", "should_hit": false}
-{"a": "how do I reset my password", "b": "how do I reset my username", "should_hit": false}
 {"a": "can I get a refund after 30 days", "b": "can I get a refund after 14 days", "should_hit": false}
+{"a": "is the reset link valid for 30 minutes", "b": "is the reset link valid for 24 hours", "should_hit": false}
+{"a": "can I get a refund within 7 days", "b": "can I get a refund within 10 days", "should_hit": false}
+{"a": "do you accept USD", "b": "do you accept EUR", "should_hit": false}
+{"a": "VAT for UK customers", "b": "VAT for EU customers", "should_hit": false}
+{"a": "price of the 5 user plan", "b": "price of the 10 user plan", "should_hit": false}
+{"a": "is my account deleted after 14 days", "b": "is my account deleted after 30 days", "should_hit": false}
+{"a": "refunds for US customers", "b": "refunds for UK customers", "should_hit": false}
+{"a": "show my invoices from 2024", "b": "show my invoices from 2025", "should_hit": false}
+{"a": "GDPR data export", "b": "CCPA data export", "should_hit": false}
+{"a": "can I add 3 team members", "b": "can I add 20 team members", "should_hit": false}
+{"a": "can I be billed in GBP", "b": "can I be billed in USD", "should_hit": false}
+{"a": "am I charged on the 1st", "b": "am I charged on the 15th", "should_hit": false}
 {"a": "how do I delete my account", "b": "how do I cancel account deletion", "should_hit": false}
+{"a": "how do I reset my password", "b": "how do I reset my username", "should_hit": false}
+{"a": "how do I cancel my subscription", "b": "how do I restart my subscription", "should_hit": false}
+{"a": "can I change my email", "b": "can I change my username", "should_hit": false}
+{"a": "why was I charged twice", "b": "why was I not charged", "should_hit": false}
+{"a": "how do I upgrade my plan", "b": "how do I downgrade my plan", "should_hit": false}
+{"a": "how do I add a team member", "b": "how do I remove a team member", "should_hit": false}
+{"a": "how do I enable two-factor authentication", "b": "how do I disable two-factor authentication", "should_hit": false}
+{"a": "how do I turn on auto renewal", "b": "how do I turn off auto renewal", "should_hit": false}
+{"a": "can I pause my subscription", "b": "can I cancel my subscription", "should_hit": false}
+{"a": "how do I export my data", "b": "how do I delete my data", "should_hit": false}
+{"a": "how long do refunds take", "b": "how long do payments take to process", "should_hit": false}
+{"a": "how do I log out of all devices", "b": "how do I log in on a new device", "should_hit": false}
+{"a": "is my account locked", "b": "is my account deleted", "should_hit": false}
+{"a": "how do I update my credit card", "b": "how do I remove my credit card", "should_hit": false}
+{"a": "where can I download my invoices", "b": "where can I download my data", "should_hit": false}
+{"a": "do you sell my data", "b": "do you delete my data", "should_hit": false}
+{"a": "refunds for annual plans", "b": "refunds for monthly plans", "should_hit": false}
+{"a": "can I get a refund", "b": "can I get a discount", "should_hit": false}
+{"a": "does 2FA support SMS", "b": "does password reset support SMS", "should_hit": false}
 {"a": "does 2FA support SMS", "b": "does 2FA support security keys", "should_hit": false}
+{"a": "what payment methods do you accept", "b": "what refund methods do you offer", "should_hit": false}
+{"a": "how do I change my billing date", "b": "how do I change my billing address", "should_hit": false}
+{"a": "what happens when my trial ends", "b": "what happens when my subscription ends", "should_hit": false}
+{"a": "who can see my data", "b": "who can edit my data", "should_hit": false}
+{"a": "how do I invite a team member", "b": "how do I invite a client", "should_hit": false}
+{"a": "is my payment information secure", "b": "is my password secure", "should_hit": false}
+{"a": "can I reactivate a deleted account", "b": "can I reactivate a cancelled subscription", "should_hit": false}
+{"a": "how do I contact support", "b": "how do I contact sales", "should_hit": false}
+{"a": "why did my payment fail", "b": "why did my refund fail", "should_hit": false}
+{"a": "how do I change my plan", "b": "how do I change my password", "should_hit": false}
+{"a": "what is the student discount", "b": "what is the nonprofit discount", "should_hit": false}
+{"a": "how long do you keep my data", "b": "how long do you keep my invoices", "should_hit": false}
+{"a": "can I use a security key to sign in", "b": "can I use a security key for payments", "should_hit": false}
+{"a": "how do I unlock my account", "b": "how do I lock my account", "should_hit": false}
+{"a": "refund to the original payment method", "b": "refund as account credit", "should_hit": false}
