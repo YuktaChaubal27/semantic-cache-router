@@ -10,7 +10,7 @@ prices:
   "openai/gpt-4o-mini": {input: 0.0, output: 0.0}
   "openai/gpt-4o":      {input: 0.0, output: 0.0}
 
-embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
+embedding_model: "sentence-transformers/all-mpnet-base-v2"
 
 cache:
   # Set this with scripts/tune_threshold.py, not by hand.

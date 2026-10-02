@@ -53,3 +53,12 @@ def test_never_cache_errors_empty_or_idk():
 def test_keyword_score():
     assert keyword_score("Refunds within 14 days", ["14 days", "30 days"]) == 0.5
     assert keyword_score("anything", []) == 1.0
+
+
+def test_guard_blocks_conflicting_specifics():
+    from app.guard import compatible
+    assert not compatible("refund policy in the EU", "refund policy in the US")
+    assert not compatible("can I get a refund after 30 days", "can I get a refund after 14 days")
+    assert compatible("how do I reset my password", "password reset steps")       # no specifics
+    assert compatible("can I turn on 2FA", "how to enable two-factor authentication")  # one side only
+    assert compatible("EU refund deadline", "refund window for EU customers")       # same specifics

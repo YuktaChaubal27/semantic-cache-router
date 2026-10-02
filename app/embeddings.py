@@ -15,4 +15,7 @@ def embed(text: str) -> list[float]:
 
 
 def dim() -> int:
-    return _model().get_sentence_embedding_dimension()
+    m = _model()
+    # newer sentence-transformers renamed this method
+    get = getattr(m, "get_embedding_dimension", None) or m.get_sentence_embedding_dimension
+    return get()

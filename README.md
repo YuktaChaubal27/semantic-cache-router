@@ -20,7 +20,7 @@ Cache answers by query similarity, send easy questions to a small model and hard
 ```mermaid
 flowchart LR
     Q[Query] --> N[Normalize + embed]
-    N --> C{Cache hit?<br/>score ≥ threshold<br/>same corpus version<br/>same tenant, within TTL}
+    N --> C{Cache hit?<br/>score ≥ threshold<br/>specifics match<br/>same corpus version<br/>same tenant, within TTL}
     C -- yes --> A[Return cached answer]
     C -- no --> R[Retrieve chunks]
     R --> RT{Router}
@@ -39,6 +39,8 @@ Every request, hit or miss, is logged to SQLite with model, tokens, cost, latenc
 ## Design decisions
 
 **Cache filters run inside the vector search.** Corpus version, tenant and TTL are Qdrant payload filters on the nearest-neighbor query, not checks applied afterward. Checking afterward means a stale entry that happens to be nearest would hide a valid entry just behind it.
+
+**A guard catches what embeddings miss.** Embedding models score "refund after 30 days" and "refund after 14 days" as near-identical. Before serving a cached answer, the cache checks that numbers and acronyms (EU, US) don't conflict between the new query and the cached one, and falls through to the next candidate if they do.
 
 **Re-ingesting invalidates the cache instantly.** `scripts/ingest.py` bumps `corpus_version`, and lookups only match the current version. The TTL is a second safety net.
 

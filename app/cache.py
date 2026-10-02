@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from qdrant_client.models import FieldCondition, Filter, MatchValue, PointStruct, Range
 
 from .config import settings
+from .guard import compatible
 from .vectorstore import client, ensure_collection
 
 SHARED = "__shared__"
@@ -38,14 +39,15 @@ def _filter(version: int, tenant: str | None) -> Filter:
     ])
 
 
-def nearest(vec: list[float], version: int, tenant: str | None = None) -> CacheHit | None:
+def nearest(vec: list[float], query: str, version: int, tenant: str | None = None) -> CacheHit | None:
+    """Best cached entry whose specifics (numbers, acronyms) don't conflict with the query."""
     res = client().query_points(
-        _collection(), query=vec, query_filter=_filter(version, tenant), limit=1, with_payload=True
+        _collection(), query=vec, query_filter=_filter(version, tenant), limit=5, with_payload=True
     ).points
-    if not res:
-        return None
-    p = res[0]
-    return CacheHit(score=p.score, payload=json.loads(p.payload["result"]))
+    for p in res:  # already sorted by similarity
+        if compatible(query, p.payload["query"]):
+            return CacheHit(score=p.score, payload=json.loads(p.payload["result"]))
+    return None
 
 
 def store(vec: list[float], query: str, result: dict, version: int, tenant: str | None = None) -> None:

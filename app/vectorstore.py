@@ -1,4 +1,5 @@
 """One shared local Qdrant client (on-disk mode, no server required)."""
+import atexit
 from functools import lru_cache
 
 from qdrant_client import QdrantClient
@@ -10,7 +11,9 @@ from .embeddings import dim
 
 @lru_cache
 def client() -> QdrantClient:
-    return QdrantClient(path=settings()["paths"]["qdrant"])
+    c = QdrantClient(path=settings()["paths"]["qdrant"])
+    atexit.register(c.close)  # close cleanly before Python shuts down
+    return c
 
 
 def ensure_collection(name: str) -> None:
